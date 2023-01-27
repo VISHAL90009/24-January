@@ -1,0 +1,55 @@
+
+
+/*write a c++ program with function called "load" that read the employee information from a file using the "File" class and creates an "Employee" object with the data.*/ #include<iostream> #include<fstream>
+ using namespace std;
+ class Employee 
+{    
+private:  
+  string name;    
+int id;   
+ double salary;   
+ public:   
+ Employee(string name, int id, double salary) 
+{        this-> name = name;       
+ this-> id = id;       
+ this-> salary = salary;    }  
+  // getter function: 
+   string getName(){ return name; 
+}    int getId(){ return id; 
+}    double getsalary(){ return salary;
+ }
+    // Setter function:   
+ void setName(string name) {   
+     this-> name = name;    }    
+void setId(int id) {       
+ this-> id = id;    } 
+   void setSalary(double  salary) {  
+      this-> salary = salary;    }
+    // Function to save employee object to file: 
+   void save(string fileName){       
+ ofstream file(fileName, ios::binary);       
+ file.write((char*)this, sizeof(Employee));    
+    file.close();    }
+    // Function to load employee object from file: 
+   void load(string fileName){   
+     ifstream file(fileName, ios::binary);  
+      file.read((char*)this, sizeof(Employee));   
+ } };
+ int main() {   
+ Employee e1("John", 101, 50000);  
+  string fileName1 = "employee1.bin";     
+   Employee e2("Harry", 102, 60000);   
+ string fileName2 = "employee2.bin";
+    // save employee object to file;   
+ e1.save(fileName1);    e2.save(fileName2);
+    // load employee object to file    e1.load(fileName1); 
+   e2.load(fileName2);
+    // Print employee object  
+  cout<<"Name: " <<e1.getName() <<endl;   
+ cout<<"ID: " <<e1.getId() <<endl; 
+   cout<<"Salary: " <<e1.getsalary() <<endl;
+
+    cout<<"Name: " <<e2.getName() <<endl; 
+   cout<<"ID: " <<e2.getId() <<endl;    
+cout<<"Salary: " <<e2.getsalary() <<endl;
+    return 0; }
