@@ -1,0 +1,63 @@
+
+
+/*Write a class called "Book" that include title, author, and ISBN as member variables. 
+Write functions called "save" and "Load that use the "File" class to store and retrive a list of books from a file.
+*/
+
+#include<iostream>
+#include<fstream>
+using namespace std;
+class Book {    
+private:      
+string title;    
+string author;       
+ string ISBN;   
+ public:       
+ Book(string title, string author, string ISBN) {    
+   this-> title = title;           
+   this-> author = author;            
+   this-> ISBN = ISBN;        }
+    //getter function:   
+     string getTitle(){ return title; }   
+    string getAuthor(){ return author; }    
+       string getISBN(){ return ISBN; }
+    // Setter function:   
+     void setTitle(string title) {        
+       this-> title = title;    }  
+  void setAuthor(string author) {      
+      this-> author = author;    }   
+ void setISBN(string ISBN) {           
+ this-> ISBN = ISBN;    }
+    // Function  to save boook object to file:  
+  void save(string fileName){     
+   ofstream file(fileName);       
+ file<<title<<endl;        
+file<<author<<endl;        
+file<<ISBN<<endl;    }
+    // Function to load book object to file:  
+  void load(string fileName){      
+  ifstream file(fileName);       
+ getline(file, title);     
+   getline(file, author);      
+  getline(file, ISBN);    }
+};int main(){   
+ Book b1("The Great Gatby", "F. Scott Fitzgerald", "978-0-7432-9336-8"); 
+   string fileName1 = "book1.txt";
+    Book b2("The Vicar of Wakefield", " Oliver Goldsmith", "978-0-7432-9336-8");  
+   string fileName2 = "book2.txt";
+    //save the object of book:   
+ b1.save(fileName1);  
+  b2.save(fileName2);
+    // Load book object from file:   
+ b1.load(fileName1);   
+ b2.load(fileName2);
+    // Print Book object:   
+ cout<< "Title: " << b1.getTitle() <<endl;    
+cout<< "Author: " << b1.getAuthor() <<endl;  
+  cout<< "SBIN: " << b1.getISBN() <<endl;
+    cout<< "\nTitle: " << b2.getTitle() <<endl;   
+ cout<< "Author: " << b2.getAuthor() <<endl;   
+ cout<< "SBIN: " << b2.getISBN() <<endl;
+
+}
+
